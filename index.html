@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Special Question for You ❤️</title>
+  <!-- Google Fonts & Confetti CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #ff4d6d;
+      --secondary: #ff758f;
+      --bg: #fff0f3;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --text: #590d22;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #ffe5ec 0%, #ffb3c1 100%);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+      padding: 1.5rem;
+    }
+
+    /* Floating background hearts */
+    .heart-bg {
+      position: fixed;
+      top: -10vh;
+      font-size: 1.5rem;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp linear infinite;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(110vh) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      max-width: 520px;
+      width: 100%;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      transition: all 0.4s ease;
+    }
+
+    .card-step {
+      display: none;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .card-step.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .handwritten {
+      font-family: 'Caveat', cursive;
+      font-size: 1.6rem;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .photo-frame {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid var(--primary);
+      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      min-height: 60px;
+      margin-top: 1rem;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 50px;
+      padding: 0.85rem 1.8rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-family: inherit;
+      transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(255, 77, 109, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 22px rgba(255, 77, 109, 0.55);
+    }
+
+    .btn-secondary {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    #btn-no {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating hearts container -->
+  <div id="heart-container"></div>
+
+  <div class="container">
+    
+    <!-- STEP 1: Introduction -->
+    <div class="card-step active" id="step-1">
+      <div class="photo-frame">
+        <!-- Replace with your favorite couple picture -->
+        <img src="https://cdn.vectorstock.com/i/500p/81/38/romantic-proposal-scene-vector-28068138.jpg">
+      </div>
+      <h1>Hey Chiki ❤️</h1>
+      <p class="handwritten">"Being with you feels like finding my favorite place in the world..."</p>
+      <p>And from that place in my heart, I have something I want to ask you.</p>
+      <button class="btn-primary" onclick="nextStep(2)">Continue 💌</button>
+    </div>
+
+    <!-- STEP 2: The Proposal Question -->
+    <div class="card-step" id="step-2">
+      <div style="font-size: 3.5rem; margin-bottom: 0.5rem;">💍</div>
+      <h1>Will you take my hand and build a beautiful future with me?</h1>
+      <p class="handwritten">No matter where life takes us, I want to walk every step with you.</p>
+      
+      <div class="btn-group" id="actions">
+        <button class="btn-primary" id="btn-yes" onclick="celebrate()">YES! 💖</button>
+        <button class="btn-secondary" id="btn-no" onmouseover="dodgeButton()" onclick="dodgeButton()">No</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: The Celebration Screen -->
+    <div class="card-step" id="step-3">
+      <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎉🥳❤️</div>
+      <h1>Darling you agreed!</h1>
+      <p class="handwritten" style="font-size: 1.8rem; margin-bottom: 1rem;">I don’t want to imagine my future without you in it</p>
+      <p>I love you more than words can say. Forever & always.</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Create random floating background hearts
+    const heartContainer = document.getElementById('heart-container');
+    const emojis = ['💖', '💕', '🌸', '✨', '❤️'];
+
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart-bg';
+      heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heartContainer.appendChild(heart);
+    }
+
+    function nextStep(step) {
+      document.querySelectorAll('.card-step').forEach(el => el.classList.remove('active'));
+      document.getElementById(`step-${step}`).classList.add('active');
+    }
+
+    // Playful dodging "No" button
+    let noClickCount = 0;
+    function dodgeButton() {
+      const noBtn = document.getElementById('btn-no');
+      const yesBtn = document.getElementById('btn-yes');
+      noClickCount++;
+
+      // Make Yes button bigger on each dodge
+      const currentScale = 1 + (noClickCount * 0.12);
+      yesBtn.style.transform = `scale(${currentScale})`;
+
+      // Random position dodge
+      const randomX = (Math.random() - 0.5) * 200;
+      const randomY = (Math.random() - 0.5) * 150;
+      noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+      if (noClickCount === 3) {
+        noBtn.innerText = "Are you sure? 🥺";
+      } else if (noClickCount >= 5) {
+        noBtn.innerText = "Wrong button! 😂";
+      }
+    }
+
+    // Celebration fireworks & confetti
+    function celebrate() {
+      nextStep(3);
+
+      const duration = 4 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 4,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#ff4d6d', '#ff758f', '#ffb3c1', '#ffffff']
+        });
+        confetti({
+          particleCount: 4,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#ff4d6d', '#ff758f', '#ffb3c1', '#ffffff']
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
